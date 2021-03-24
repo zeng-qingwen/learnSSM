@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqw.dao.TeacherMapper">
+
+    <select id="findAll" resultType="com.zqw.pojo.Teacher">
+            select * from `teacher`;
+    </select>
+
+
+
+    <select id="findAllInfo" resultMap="TeacherInfo">
+            select s.id sid,s.name sname, t.name tname ,t.id tid
+            from teacher t,student s
+            where s.tid=t.id;
+    </select>
+
+    <resultMap id="TeacherInfo" type="com.zqw.pojo.Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname"/>
+        <collection property="students" ofType="com.zqw.pojo.Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+
+
+
+    <select id="findAllInfo2" resultMap="TeacherInfo02">
+        select * from teacher;
+    </select>
+
+    <resultMap id="TeacherInfo02" type="com.zqw.pojo.Teacher">
+        <collection property="students" column="id" javaType="ArrayList" ofType="com.zqw.pojo.Student" select="getStudent"/>
+    </resultMap>
+
+    <select id="getStudent" resultType="com.zqw.pojo.Student">
+        select * from student where tid =#{id};
+    </select>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    指定要扫描的�?,这个包下的注解会生效-->
+    <context:component-scan base-package="com.UserSpringIOC.beans"/>
+    <context:annotation-config></context:annotation-config>
+    <import resource="Dao.xml"></import>
+    <import resource="Control.xml"></import>
+    <import resource="Service.xml"></import>
+    <import resource="Beans.xml"></import>
+</beans>

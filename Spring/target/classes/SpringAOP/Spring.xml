@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--    指定要扫描的�?,这个包下的注解会生效-->
+    <context:component-scan base-package="com.UserSpringIOC.beans"/>
+    <context:annotation-config></context:annotation-config>
+
+    <!--    注册bean-->
+    <bean id="userService" class="com.SpringAOP.AOP.UserServiceImpl"/>
+    <bean id="BeforeLog" class="com.SpringAOP.AOP.BeforeLog"/>
+    <bean id="AfterLog" class="com.SpringAOP.AOP.AfterLog"/>
+
+    <!--    方式�?使用原生态配置AOP:�?要导入aop的约束配�?-->
+    <aop:config>
+        <!--        切入点：-->
+        <aop:pointcut id="pointcut" expression="execution(* com.SpringAOP.AOP.UserServiceImpl.*(..))"/>
+        <!--        执行环绕增强�?-->
+        <aop:advisor advice-ref="BeforeLog" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="AfterLog" pointcut-ref="pointcut"/>
+    </aop:config>
+
+</beans>

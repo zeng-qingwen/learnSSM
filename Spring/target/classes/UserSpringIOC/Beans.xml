@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config></context:annotation-config>
+    <bean id="Hello" class="com.UserSpringIOC.beans.Hello"></bean>
+
+    <!--    set注入的实�?-->
+    <bean id="SetInject01" class="com.UserSpringIOC.beans.SetInject01">
+        <property name="hello" ref="Hello"/>
+        <property name="host" value="127.0.0.1"/>
+        <property name="port" value="8080"/>
+
+<!--        list对象-->
+        <property name="list">
+            <list>
+                <value>a</value>
+                <value>b</value>
+                <value>c</value>
+            </list>
+        </property>
+
+<!--        set对象-->
+        <property name="set">
+            <set>
+                <value>北京</value>
+                <value>上海</value>
+                <value>深圳</value>
+                <value>广州</value>
+            </set>
+        </property>
+
+<!--        map对象-->
+        <property name="map">
+            <map>
+                <entry key="1" value="�?"/>
+                <entry key="2" value="�?"/>
+                <entry key="3" value="�?"/>
+            </map>
+        </property>
+     </bean>
+
+    <!--    构�?�器注入-->
+    <bean id="ConstructorInject" class="com.UserSpringIOC.beans.ConstructorInject">
+        <constructor-arg name="hello" value="ConstructorInject"></constructor-arg>
+    </bean>
+
+    <!--    set注入的全部情�?-->
+    <bean id="address" class="com.UserSpringIOC.beans.Address">
+        <property name="address" value="中国"/>
+    </bean>
+    <bean id="student" class="com.UserSpringIOC.beans.Student">
+<!--        普�?��?�注�?-->
+        <property name="name" value="曾庆�?"/>
+
+<!--        bean注入-->
+        <property name="address" ref="address"/>
+
+<!--        数组注入-->
+        <property name="books">
+            <array>
+                <value>红楼�?</value>
+                <value>西游�?</value>
+                <value>水浒�?</value>
+                <value>三国演义</value>
+            </array>
+        </property>
+
+<!--        list注入-->
+        <property name="habbys">
+            <list>
+                <value>听歌</value>
+                <value>敲代�?</value>
+                <value>看电�?</value>
+            </list>
+        </property>
+
+<!--        set注入-->
+        <property name="game">
+            <set>
+                <value>王�?�荣�?</value>
+                <value>英雄联盟</value>
+                <value>球球大作�?</value>
+                <value>CF</value>
+            </set>
+        </property>
+
+<!--        map注入-->
+        <property name="card">
+            <map>
+                <entry key="身份�?" value="36078220001108175X"/>
+                <entry key="银行�?" value="8888888888888"/>
+            </map>
+        </property>
+
+<!--       注入null -->
+        <property name="wife">
+            <null/>
+        </property>
+
+        <property name="info">
+            <props>
+                <prop key="年龄">20</prop>
+                <prop key="性别">�?</prop>
+                <prop key="学号">6020191811</prop>
+                <prop key="出生日期">2000,11,08</prop>
+            </props>
+        </property>
+
+     </bean>
+
+    <!--    cnamespeace相当于使用构造器注入，必须有有参构�?�方�?-->
+    <bean id="Cnamespeace" class="com.UserSpringIOC.beans.PCnamespace" c:name="曾庆�?" c:age="20"/>
+    
+    <!--    pnamespeace相当于set注入,必须要有set方法-->
+    <bean id="Pnamespeace" class="com.UserSpringIOC.beans.PCnamespace" p:age="20" p:name="曾庆�?"/>
+
+    <!--    自动装配-->
+    <bean id="dog" class="com.UserSpringIOC.beans.Dog"/>
+    <bean id="cat" class="com.UserSpringIOC.beans.Cat"/>
+    <bean id="people" class="com.UserSpringIOC.beans.People"/>
+
+</beans>
